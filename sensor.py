@@ -27,10 +27,11 @@ def get_cpu_temperature():
 	return float(output[output.index('=') + 1:output.rindex("'")])
 	cpu_temp = get_cpu_temperature()
 	
-factor = 0.8
-cpu_temps = [get_cpu_temperature()] * 5
 
 while True:
+
+	factor = 0.8
+	cpu_temps = [get_cpu_temperature()] * 5
 
 	# Read sensors
 	temp = bme280.get_temperature()
