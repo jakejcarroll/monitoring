@@ -18,6 +18,14 @@ bus = SMBus(1)
 bme280 = BME280(i2c_dev=bus)
 pms5003 = PMS5003()
 
+    # Get CPU temperature to use for compensation
+def get_cpu_temperature():
+	process = Popen(['vcgencmd', 'measure_temp'], stdout=PIPE, universal_newlines=True)
+	output, _error = process.communicate()
+	output = output.decode()
+	return float(output[output.index('=') + 1:output.rindex("'")])
+	cpu_temp = get_cpu_temperature()
+
 while True:
 
 	# Read sensors
@@ -53,16 +61,6 @@ while True:
 	gas_oxidising = (readings_gas.oxidising)
 	gas_nh3 = (readings_gas.nh3)
 	
-
-    
-    # Get CPU temperature to use for compensation
-	def get_cpu_temperature():
-		process = Popen(['vcgencmd', 'measure_temp'], stdout=PIPE, universal_newlines=True)
-		output, _error = process.communicate()
-		output = output.decode()
-		return float(output[output.index('=') + 1:output.rindex("'")])
-    	
-    	cpu_temp = get_cpu_temperature()
     
     #Smooth out with some averaging to decrease jitter
     cpu_temps = cpu_temps[1:] + [cpu_temp]
