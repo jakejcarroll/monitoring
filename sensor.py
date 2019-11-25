@@ -28,17 +28,17 @@ while True:
 	readings_gas = gas.read_all()
 	
 	# Get the temperature of the CPU for compensation
-def get_cpu_temperature():
-    with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
-        temp = f.read()
-        temp = int(temp) / 1000.0
-    return temp
+	def get_cpu_temperature():
+    	with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
+        	temp = f.read()
+       	 temp = int(temp) / 1000.0
+  	  return temp
     
     # Tuning factor for compensation. Decrease this number to adjust the
-# temperature down, and increase to adjust up
-factor = 0.8
+	# temperature down, and increase to adjust up
+	factor = 0.8
 
-cpu_temps = [get_cpu_temperature()] * 5
+	cpu_temps = [get_cpu_temperature()] * 5
 	
 	#Format data
 	pressure_in = 0.03937008*(pressure_mb)
