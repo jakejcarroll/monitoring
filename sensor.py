@@ -16,7 +16,7 @@ ACCESS_KEY = "ist_cE0zFD5C1Y5DSKWsSGxIBcTRIOVqPO_x"
 streamer = Streamer(bucket_name=BUCKET_NAME, bucket_key=BUCKET_KEY, access_key=ACCESS_KEY)
 
 bus = SMBus(1)
-bme280 = BME280(i2c_dev=bus)
+bme280 = bme280(i2c_dev=bus)
 pms5003 = PMS5003()
 
     # Get CPU temperature to use for compensation
