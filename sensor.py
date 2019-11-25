@@ -77,7 +77,7 @@ while True:
 	
 	#Stream data
 	streamer.log("Temperature " +  "(C): ", temp_c)
-	streamer.log("Temperature " +  "(C): ", comp_temp)
+	streamer.log("Compensated Temperature " +  "(C): ", comp_temp)
 	streamer.log("Humidity " + "%: ", humidity)
 	streamer.log("Pressure "+"(IN) ", pressure_in)
 	streamer.log("PM1.0 "+ "(ug/m3) ", pm1)
