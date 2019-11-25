@@ -31,7 +31,7 @@ def get_cpu_temperature():
 while True:
 
 	cpu_temp = get_cpu_temperature()
-	factor = 0.8
+	factor = 1
 	cpu_temps = [get_cpu_temperature()] * 5
 
 	# Read sensors
