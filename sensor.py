@@ -18,9 +18,6 @@ bus = SMBus(1)
 bme280 = BME280(i2c_dev=bus)
 pms5003 = PMS5003()
 
-factor = 0.8
-cpu_temps = [get_cpu_temperature()] * 5
-
     # Get CPU temperature to use for compensation
 def get_cpu_temperature():
 	process = Popen(['vcgencmd', 'measure_temp'], stdout=PIPE, universal_newlines=True)
@@ -28,6 +25,9 @@ def get_cpu_temperature():
 	output = output.decode()
 	return float(output[output.index('=') + 1:output.rindex("'")])
 	cpu_temp = get_cpu_temperature()
+	
+factor = 0.8
+cpu_temps = [get_cpu_temperature()] * 5
 
 while True:
 
