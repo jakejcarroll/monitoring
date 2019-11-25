@@ -31,8 +31,8 @@ while True:
 	def get_cpu_temperature():
     	with open("/sys/class/thermal/thermal_zone0/temp", "r") as f:
         	temp = f.read()
-       	 temp = int(temp) / 1000.0
-  	  return temp
+       	 	temp = int(temp) / 1000.0
+  	  		return temp
     
     # Tuning factor for compensation. Decrease this number to adjust the
 	# temperature down, and increase to adjust up
