@@ -5,6 +5,7 @@ import time
 import sys
 from pms5003 import PMS5003
 from enviroplus import gas
+from subprocess import Popen
 
 # --------- User Settings ---------
 BUCKET_NAME = "BME280"
