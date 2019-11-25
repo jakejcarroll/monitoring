@@ -73,6 +73,7 @@ while True:
 	avg_cpu_temp = sum(cpu_temps) / float(len(cpu_temps))
 	raw_temp = bme280.get_temperature()
 	comp_temp = raw_temp - ((avg_cpu_temp - raw_temp) / factor)
+	comp_temp = float("{0:.1f}".format(comp_temp))
 	
 	
 	#Stream data
