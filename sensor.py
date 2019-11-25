@@ -62,7 +62,7 @@ while True:
 		output = output.decode()
 		return float(output[output.index('=') + 1:output.rindex("'")])
     	
-    cpu_temp = get_cpu_temperature()
+    	cpu_temp = get_cpu_temperature()
     
     #Smooth out with some averaging to decrease jitter
     cpu_temps = cpu_temps[1:] + [cpu_temp]
