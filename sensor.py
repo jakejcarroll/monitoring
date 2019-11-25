@@ -1,5 +1,5 @@
-from bme280 import BME280
 from smbus import SMBus
+from bme280 import BME280
 from ISStreamer.Streamer import Streamer
 import time
 import sys
