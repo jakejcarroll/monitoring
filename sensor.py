@@ -63,9 +63,9 @@ while True:
 	pm1 = (readings.pm_ug_per_m3(1.0))
 	pm25 = (readings.pm_ug_per_m3(2.5))
 	pm10 = (readings.pm_ug_per_m3(10))
-	gas_reducing = (readings_gas.reducing)
-	gas_oxidising = (readings_gas.oxidising)
-	gas_nh3 = (readings_gas.nh3)
+	gas_reducing =  float("{0:.f}".format(readings_gas.reducing))
+	gas_oxidising = float("{0:.f}".format(readings_gas.oxidising))
+	gas_nh3 = float("{0:.f}".format(readings_gas.nh3))
 	
     
     #Smooth out with some averaging to decrease jitter
