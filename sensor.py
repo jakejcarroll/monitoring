@@ -1,5 +1,5 @@
 from smbus import SMBus
-import bme280
+#import bme280
 from ISStreamer.Streamer import Streamer
 import time
 import sys
@@ -16,11 +16,18 @@ ACCESS_KEY = "ist_cE0zFD5C1Y5DSKWsSGxIBcTRIOVqPO_x"
 streamer = Streamer(bucket_name=BUCKET_NAME, bucket_key=BUCKET_KEY, access_key=ACCESS_KEY)
 
 bus = SMBus(1)
-bme280 = bme280(i2c_dev=bus)
 pms5003 = PMS5003()
 
+#calibration_params = bme280.load_calibration_params(bus, address)
+
+# the sample method will take a single reading and return a
+# compensated_reading object
+
+#data = bme280.sample(bus, address, calibration_params)
+
+
     # Get CPU temperature to use for compensation
-def get_cpu_temperature():
+#def get_cpu_temperature():
 	process = Popen(['vcgencmd', 'measure_temp'], stdout=PIPE, universal_newlines=True)
 	output, _error = process.communicate()
 	output = output.decode()
@@ -30,14 +37,14 @@ def get_cpu_temperature():
 
 while True:
 
-	cpu_temp = get_cpu_temperature()
-	factor = 1
-	cpu_temps = [get_cpu_temperature()] * 5
+	#cpu_temp = get_cpu_temperature()
+	#factor = 1
+	#cpu_temps = [get_cpu_temperature()] * 5
 
 	# Read sensors
-	temp = bme280.get_temperature()
-	humidity = bme280.get_humidity()
-	pressure_mb = bme280.get_pressure()
+	#temp = bme280.get_temperature()
+	#humidity = bme280.get_humidity()
+	#pressure_mb = bme280.get_pressure()
 	readings = pms5003.read()
 	readings_gas = gas.read_all()
 	
@@ -56,10 +63,10 @@ while True:
 	#cpu_temps = [get_cpu_temperature()] * 5
 	
 	#Format data
-	pressure_in = 0.03937008*(pressure_mb)
-	pressure_in = float("{0:.2f}".format(pressure_in))
-	humidity = float("{0:.2f}".format(humidity))
-	temp_c = float("{0:.1f}".format(temp))
+	#pressure_in = 0.03937008*(pressure_mb)
+	#pressure_in = float("{0:.2f}".format(pressure_in))
+	#humidity = float("{0:.2f}".format(humidity))
+	#temp_c = float("{0:.1f}".format(temp))
 	pm1 = (readings.pm_ug_per_m3(1.0))
 	pm25 = (readings.pm_ug_per_m3(2.5))
 	pm10 = (readings.pm_ug_per_m3(10))
@@ -69,18 +76,18 @@ while True:
 	
     
     #Smooth out with some averaging to decrease jitter
-	cpu_temps = cpu_temps[1:] + [cpu_temp]
-	avg_cpu_temp = sum(cpu_temps) / float(len(cpu_temps))
-	raw_temp = bme280.get_temperature()
-	comp_temp = raw_temp - ((avg_cpu_temp - raw_temp) / factor)
-	comp_temp = float("{0:.1f}".format(comp_temp))
+	#cpu_temps = cpu_temps[1:] + [cpu_temp]
+	#avg_cpu_temp = sum(cpu_temps) / float(len(cpu_temps))
+	#raw_temp = bme280.get_temperature()
+	#comp_temp = raw_temp - ((avg_cpu_temp - raw_temp) / factor)
+	#comp_temp = float("{0:.1f}".format(comp_temp))
 	
 	
 	#Stream data
-	streamer.log("Temperature " +  "(C): ", temp_c)
-	streamer.log("Compensated Temperature " +  "(C): ", comp_temp)
-	streamer.log("Humidity " + "%: ", humidity)
-	streamer.log("Pressure "+"(IN) ", pressure_in)
+	#streamer.log("Temperature " +  "(C): ", temp_c)
+	#streamer.log("Compensated Temperature " +  "(C): ", comp_temp)
+	#streamer.log("Humidity " + "%: ", humidity)
+	#streamer.log("Pressure "+"(IN) ", pressure_in)
 	streamer.log("PM1.0 "+ "(ug/m3) ", pm1)
 	streamer.log("PM2.5 "+ "(ug/m3) ", pm25)
 	streamer.log("PM10.0 "+ "(ug/m3) ", pm10)
