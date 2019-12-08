@@ -1,6 +1,6 @@
 #!/usr/bin/python
 from smbus import SMBus
-#import bme280
+import bme280
 from ISStreamer.Streamer import Streamer
 import time
 import sys
